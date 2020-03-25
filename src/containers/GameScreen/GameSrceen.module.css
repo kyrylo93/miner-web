@@ -1,0 +1,8 @@
+.GameScreen {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 500px;
+    height: 500px;
+}
