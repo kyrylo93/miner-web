@@ -1,25 +1,26 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import classes from './GameBlock.module.css';
 
-const GameBlock = ({x, y, type, isBombsShowed, onBombClick}) => {
+const GameBlock = ({x, y, type, isBombsShowed, onBombClick, onSetFlagClick, getCloseBombsAmount}) => {
 	const isBomb = type === 'b';
 	const icon = isBomb ? <div className={classes.Bomb} /> : null;
+	const [amount, setAmount] = useState(0);
 	
-	const onBlockClick = () => {
+	useEffect(() => {
+		setAmount(getCloseBombsAmount(x, y));
+	}, [type, getCloseBombsAmount]);
+	
+	const onBlockClick = (event) => {
 		
 		if (isBomb) {
-			onBombClick();
+			onBombClick(event);
 		}
 	};
 	
-	const onContextClick = event => {
-		event.preventDefault();
-		console.log('onContextClick')
-	};
-	
 	return (
-		<section className={classes.GameBlock} onClick={onBlockClick} onContextMenu={onContextClick}>
+		<section className={classes.GameBlock} onClick={onBlockClick} onContextMenu={onSetFlagClick}>
 			{isBombsShowed && icon}
+			<span>{amount}</span>
 		</section>
 	)
 };

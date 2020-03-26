@@ -1,6 +1,7 @@
 .GameBlock {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
     justify-content: center;
 
     width: 50px;
@@ -8,6 +9,8 @@
 
     box-sizing: border-box;
     border: 1px solid #8c8c8c;
+
+    cursor: pointer;
 }
 
 .Bomb {
