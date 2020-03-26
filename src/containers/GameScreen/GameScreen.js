@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import classes from './GameSrceen.module.css';
 
 //components
@@ -9,41 +9,49 @@ import { getRandomNumberInRange } from "../../utils/utils";
 
 const GameScreen = () => {
 	const BLOCKS_LINE_AMOUNT = 10;
-	const blocksMap = [];
+	const [blocksMap, setBlocksMap] = useState([
+		["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+		["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+		["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+		["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+		["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+		["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+		["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+		["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+		["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+		["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+	]);
 	
-	const [isBombsShowed, setIsBombsShowed] = useState(false);
+	const [isBombsShowed, setIsBombsShowed] = useState(true);
 	
-	// create game map
-	for (let x = 0; x < BLOCKS_LINE_AMOUNT; x++) {
-		const row = [];
-		for (let y = 0; y < BLOCKS_LINE_AMOUNT; y++) {
-			row.push('-')
+	useEffect(() => {
+		// add bombs to map
+		const newMap = [...blocksMap];
+		for (let i = 0; i < BLOCKS_LINE_AMOUNT; i++) {
+			const x = getRandomNumberInRange(BLOCKS_LINE_AMOUNT);
+			const y = getRandomNumberInRange(BLOCKS_LINE_AMOUNT);
+			
+			if (newMap[x][y] === '-') {
+				newMap[x][y] = 'b'
+			} else {
+				i--
+			}
 		}
-		blocksMap.push(row);
-	}
-	// add bombs to map
-	for (let i = 0; i < BLOCKS_LINE_AMOUNT; i++) {
-		const x = getRandomNumberInRange(BLOCKS_LINE_AMOUNT);
-		const y = getRandomNumberInRange(BLOCKS_LINE_AMOUNT);
 		
-		if (blocksMap[x][y] === '-') {
-			blocksMap[x][y] = 'b'
-		} else {
-			i--
-		}
-	}
+		setBlocksMap(newMap);
+	}, []);
 	
 	const onBombClick = () => {
+		console.log('onBombClick')
 		setIsBombsShowed(true);
 	};
 	
 	const blocks = blocksMap.map((row, rowIndex) => {
-		return row.map((el, elIndex) => (
+		return row.map((el, elIndex) =>
 			<GameBlock
 				x={rowIndex} y={elIndex} isBombsShowed={isBombsShowed}
 				type={el} key={`${rowIndex}_${elIndex}`} onBombClick={onBombClick}
-			/>
-			))
+			/>)
 	});
 	
 	return (

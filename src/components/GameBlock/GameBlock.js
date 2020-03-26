@@ -6,7 +6,6 @@ const GameBlock = ({x, y, type, isBombsShowed, onBombClick}) => {
 	const icon = isBomb ? <div className={classes.Bomb} /> : null;
 	
 	const onBlockClick = () => {
-		console.log('onBlockClick');
 		
 		if (isBomb) {
 			onBombClick();
