@@ -3,9 +3,11 @@ import classes from './GameBlock.module.css';
 
 const GameBlock = ({x, y, type}) => {
 	
+	const icon = type === 'b' ? <div className={classes.Bomb} /> : null;
+	
 	return (
 		<section className={classes.GameBlock}>
-			<span>{x}/{y}, {type}</span>
+			{icon}
 		</section>
 	)
 };

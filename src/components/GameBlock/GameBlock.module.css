@@ -1,6 +1,21 @@
 .GameBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     width: 50px;
     height: 50px;
+
     box-sizing: border-box;
     border: 1px solid #8c8c8c;
+}
+
+.Bomb {
+    width: 10px;
+    height: 10px;
+
+    margin: 0 auto;
+
+    border-radius: 10px;
+    background-color: #000;
 }
