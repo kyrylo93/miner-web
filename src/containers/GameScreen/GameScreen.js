@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from './GameSrceen.module.css';
 
 //components
@@ -10,6 +10,8 @@ import { getRandomNumberInRange } from "../../utils/utils";
 const GameScreen = () => {
 	const BLOCKS_LINE_AMOUNT = 10;
 	const blocksMap = [];
+	
+	const [isBombsShowed, setIsBombsShowed] = useState(false);
 	
 	// create game map
 	for (let x = 0; x < BLOCKS_LINE_AMOUNT; x++) {
@@ -31,8 +33,17 @@ const GameScreen = () => {
 		}
 	}
 	
+	const onBombClick = () => {
+		setIsBombsShowed(true);
+	};
+	
 	const blocks = blocksMap.map((row, rowIndex) => {
-		return row.map((el, elIndex) => <GameBlock x={rowIndex} y={elIndex} type={el} key={`${rowIndex}_${elIndex}`} />)
+		return row.map((el, elIndex) => (
+			<GameBlock
+				x={rowIndex} y={elIndex} isBombsShowed={isBombsShowed}
+				type={el} key={`${rowIndex}_${elIndex}`} onBombClick={onBombClick}
+			/>
+			))
 	});
 	
 	return (

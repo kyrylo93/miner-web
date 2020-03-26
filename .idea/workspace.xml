@@ -4,7 +4,7 @@
     <list default="true" id="594ebc97-ad87-4b53-b1bd-3b3583df1cf4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/GameBlock/GameBlock.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GameBlock/GameBlock.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/GameBlock/GameBlock.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GameBlock/GameBlock.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/GameScreen/GameScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/GameScreen/GameScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +62,8 @@
       <option name="presentableId" value="Default" />
       <updated>1585144895400</updated>
       <workItem from="1585144897084" duration="268000" />
-      <workItem from="1585167363335" duration="4150000" />
+      <workItem from="1585167363335" duration="4500000" />
+      <workItem from="1585225160238" duration="1771000" />
     </task>
     <servers />
   </component>
