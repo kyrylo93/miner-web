@@ -55,7 +55,6 @@ const GameScreen = () => {
 	};
 	
 	const getCloseBombsAmount = (x, y) => {
-		
 		const leftElement = blocksMap?.[x]?.[y - 1];
 		const rightElement = blocksMap?.[x]?.[y + 1];
 		

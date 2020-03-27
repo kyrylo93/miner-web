@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="594ebc97-ad87-4b53-b1bd-3b3583df1cf4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/GameBlock/GameBlock.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GameBlock/GameBlock.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/GameBlock/GameBlock.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GameBlock/GameBlock.module.css" afterDir="false" />
@@ -66,7 +65,7 @@
       <workItem from="1585144897084" duration="268000" />
       <workItem from="1585167363335" duration="4500000" />
       <workItem from="1585225160238" duration="1771000" />
-      <workItem from="1585232887656" duration="1142000" />
+      <workItem from="1585232887656" duration="2506000" />
     </task>
     <servers />
   </component>
