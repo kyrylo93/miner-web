@@ -26,6 +26,7 @@ const GameBlock = ({x, y, type, isBombsShowed, onBombClick, onSetFlagClick, getC
 	};
 	
 	const onContextBlockClick = event => {
+		event.preventDefault();
 		if (isBombsShowed) return;
 		
 		setIsFlagSet(!isFlagSet);

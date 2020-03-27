@@ -50,7 +50,6 @@ const GameScreen = () => {
 	};
 	
 	const onSetFlagClick = event => {
-		event.preventDefault();
 		console.log('onContextClick')
 	};
 	
