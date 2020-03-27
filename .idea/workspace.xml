@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/GameBlock/GameBlock.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GameBlock/GameBlock.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/GameBlock/GameBlock.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GameBlock/GameBlock.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/GameScreen/GameScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/GameScreen/GameScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +65,7 @@
       <workItem from="1585167363335" duration="4500000" />
       <workItem from="1585225160238" duration="1771000" />
       <workItem from="1585232887656" duration="2506000" />
+      <workItem from="1585297878244" duration="768000" />
     </task>
     <servers />
   </component>

@@ -18,8 +18,16 @@
     width: 10px;
     height: 10px;
 
-    margin: 0 auto;
-
     border-radius: 10px;
     background-color: #000;
+}
+
+.Flag {
+    width: 0;
+    height: 0;
+
+    border: 10px solid transparent;
+    border-left: 10px solid red;
+
+    transform: translateX(35%);
 }
