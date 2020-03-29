@@ -10,29 +10,30 @@ import { getRandomNumberInRange } from "../../utils/utils";
 const GameScreen = () => {
 	const BLOCKS_LINE_AMOUNT = 10;
 	const [blocksMap, setBlocksMap] = useState([
-		["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-		["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-		["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-		["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-		["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-		["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-		["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-		["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-		["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-		["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+		[{value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}],
+		[{value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}],
+		[{value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}],
+		[{value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}],
+		[{value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}],
+		[{value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}],
+		[{value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}],
+		[{value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}],
+		[{value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}],
+		[{value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}, {value: "-", bombsAround: 0}],
 	]);
 	
 	const [isBombsShowed, setIsBombsShowed] = useState(false);
 	
 	useEffect(() => {
+		console.log(blocksMap)
 		// add bombs to map
 		const newMap = [...blocksMap];
 		for (let i = 0; i < BLOCKS_LINE_AMOUNT; i++) {
 			const x = getRandomNumberInRange(BLOCKS_LINE_AMOUNT);
 			const y = getRandomNumberInRange(BLOCKS_LINE_AMOUNT);
 			
-			if (newMap[x][y] === '-') {
-				newMap[x][y] = 'b'
+			if (newMap[x][y].value === '-') {
+				newMap[x][y].value = 'b'
 			} else {
 				i--
 			}
@@ -56,27 +57,29 @@ const GameScreen = () => {
 	};
 	
 	const getCloseBombsAmount = (x, y) => {
-		const leftElement = blocksMap?.[x]?.[y - 1];
-		const rightElement = blocksMap?.[x]?.[y + 1];
+		const leftElement = blocksMap?.[x]?.[y - 1]?.value;
+		const rightElement = blocksMap?.[x]?.[y + 1]?.value;
+		const topElement = blocksMap?.[x - 1]?.[y]?.value;
+		const bottomElement = blocksMap?.[x + 1]?.[y]?.value;
 		
-		const topElement = blocksMap?.[x - 1]?.[y];
-		const bottomElement = blocksMap?.[x + 1]?.[y];
+		const lefTopElement = blocksMap?.[x - 1]?.[y - 1]?.value;
+		const rightTopElement = blocksMap?.[x - 1]?.[y + 1]?.value;
 		
-		const lefTopElement = blocksMap?.[x - 1]?.[y - 1];
-		const rightTopElement = blocksMap?.[x - 1]?.[y + 1];
-		
-		const lefBottomElement = blocksMap?.[x + 1]?.[y - 1];
-		const rightBottomElement = blocksMap?.[x + 1]?.[y + 1];
+		const lefBottomElement = blocksMap?.[x + 1]?.[y - 1]?.value;
+		const rightBottomElement = blocksMap?.[x + 1]?.[y + 1]?.value;
 		
 		const elements = [leftElement, rightElement, topElement, bottomElement, lefTopElement, rightTopElement, lefBottomElement, rightBottomElement];
-		return elements.reduce((acc, curr) => curr === 'b' ? acc + 1 : acc, 0);
+		
+		const amount =  elements.reduce((acc, curr) => curr === 'b' ? acc + 1 : acc, 0);
+		blocksMap[x][y].amount = amount;
+		return amount;
 	};
 	
 	const blocks = blocksMap.map((row, rowIndex) => {
 		return row.map((el, elIndex) =>
 			<GameBlock
 				x={rowIndex} y={elIndex} isBombsShowed={isBombsShowed} getCloseBombsAmount={getCloseBombsAmount}
-				type={el} key={`${rowIndex}_${elIndex}`} onBombClick={onBombClick} onSetFlagClick={onSetFlagClick}
+				type={el.value} key={`${rowIndex}_${elIndex}`} onBombClick={onBombClick} onSetFlagClick={onSetFlagClick}
 			/>)
 	});
 	
