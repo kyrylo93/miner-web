@@ -12,6 +12,7 @@
 
     cursor: pointer;
     background-color: #dbdbdf;
+    user-select: none;
 }
 
 .Bomb {
