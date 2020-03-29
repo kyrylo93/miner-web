@@ -1,23 +1,25 @@
 import React, {useEffect, useState} from "react";
 import classes from './GameBlock.module.css';
 
-const GameBlock = ({x, y, type, isBombsShowed, onBombClick, onSetFlagClick, getCloseBombsAmount}) => {
-	const isBomb = type === 'b';
-	const [amount, setAmount] = useState(0);
-	const [clicked, setClicked] = useState(false);
-	const [isFlagSet, setIsFlagSet] = useState(false);
+const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, getCloseBombsAmount}) => {
+	const isBomb = element.type === 'b';
+	const [amount, setAmount] = useState(element.amount);
+	const [clicked, setClicked] = useState(element.isClicked);
+	const [isFlagSet, setIsFlagSet] = useState(element.isFlagSet);
 	const [isBoomed, setIsBoomed] = useState(false);
 	
 	useEffect(() => {
-		setAmount(getCloseBombsAmount(x, y));
-	}, [type, getCloseBombsAmount]);
+		const aroundBombsAmount = getCloseBombsAmount(x, y);
+		element.bombsAround = aroundBombsAmount;
+		setAmount(aroundBombsAmount);
+	}, [element.type, getCloseBombsAmount]);
 	
 	const onBlockClick = event => {
 		if (isBombsShowed) return;
 		if (isFlagSet) return;
 		
 		setClicked(true);
-		event.target.style.backgroundColor = '#bfbfbf';
+		element.isClicked = true;
 		
 		if (isBomb) {
 			setIsBoomed(true);
@@ -30,6 +32,7 @@ const GameBlock = ({x, y, type, isBombsShowed, onBombClick, onSetFlagClick, getC
 		if (isBombsShowed) return;
 		if (clicked) return;
 		
+		element.isFlagSet = !isFlagSet;
 		setIsFlagSet(!isFlagSet);
 		onSetFlagClick(event, x, y);
 	};
@@ -38,8 +41,11 @@ const GameBlock = ({x, y, type, isBombsShowed, onBombClick, onSetFlagClick, getC
 	const flagIcon = isFlagSet ? <div className={classes.Flag} /> : null;
 	const amountParagraph = <span>{amount}</span>;
 	
+	let backgroundColor = clicked ? '' : '#dbdbdf';
+	backgroundColor = isBoomed ? 'red' : backgroundColor;
+	
 	return (
-		<section className={classes.GameBlock} onClick={onBlockClick} onContextMenu={onContextBlockClick}>
+		<section className={classes.GameBlock} onClick={onBlockClick} onContextMenu={onContextBlockClick} style={{backgroundColor}}>
 			{isBombsShowed && bombIcon}
 			{isFlagSet && flagIcon}
 			{clicked && !isBoomed && amount !== 0 && amountParagraph}
