@@ -49,8 +49,10 @@ const GameScreen = () => {
 		event.target.style.backgroundColor = 'red';
 	};
 	
-	const onSetFlagClick = event => {
+	const onSetFlagClick = (event, x, y) => {
 		console.log('onContextClick')
+		
+		console.log(x, y)
 	};
 	
 	const getCloseBombsAmount = (x, y) => {

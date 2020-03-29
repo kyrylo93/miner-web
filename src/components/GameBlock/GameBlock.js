@@ -31,7 +31,7 @@ const GameBlock = ({x, y, type, isBombsShowed, onBombClick, onSetFlagClick, getC
 		if (clicked) return;
 		
 		setIsFlagSet(!isFlagSet);
-		onSetFlagClick(event);
+		onSetFlagClick(event, x, y);
 	};
 	
 	const bombIcon = isBomb ? <div className={classes.Bomb} /> : null;
