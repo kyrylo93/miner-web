@@ -54,23 +54,25 @@ const GameScreen = () => {
 		console.log(x, y)
 	};
 	
+	const getNextBlock = (x, y, left = 0, right = 0, top = 0, bottom = 0) => {
+		return blocksMap?.[x - top + bottom]?.[y - left + right]
+	};
+	
 	const getCloseBombsAmount = (x, y) => {
-		const leftElement = blocksMap?.[x]?.[y - 1]?.type;
-		const rightElement = blocksMap?.[x]?.[y + 1]?.type;
-		const topElement = blocksMap?.[x - 1]?.[y]?.type;
-		const bottomElement = blocksMap?.[x + 1]?.[y]?.type;
+		const leftElement = getNextBlock(x, y, 1, 0, 0, 0)?.type;
+		const rightElement = getNextBlock(x, y, 0, 1, 0, 0)?.type;
+		const topElement = getNextBlock(x, y, 0, 0, 1, 0)?.type;
+		const bottomElement = getNextBlock(x, y, 0, 0, 0, 1)?.type;
 		
-		const lefTopElement = blocksMap?.[x - 1]?.[y - 1]?.type;
-		const rightTopElement = blocksMap?.[x - 1]?.[y + 1]?.type;
-		
-		const lefBottomElement = blocksMap?.[x + 1]?.[y - 1]?.type;
-		const rightBottomElement = blocksMap?.[x + 1]?.[y + 1]?.type;
+		const lefTopElement = getNextBlock(x, y, 1, 0, 1, 0)?.type;
+		const rightTopElement = getNextBlock(x, y, 0, 1, 1, 0)?.type;
+		const lefBottomElement = getNextBlock(x, y, 1, 0, 0, 1)?.type;
+		const rightBottomElement = getNextBlock(x, y, 0, 1, 0, 1)?.type;
 		
 		const elements = [leftElement, rightElement, topElement, bottomElement, lefTopElement, rightTopElement, lefBottomElement, rightBottomElement];
-		
-		const amount =  elements.reduce((acc, curr) => curr === 'b' ? acc + 1 : acc, 0);
-		blocksMap[x][y].amount = amount;
-		return amount;
+		const bombsAmount =  elements.reduce((acc, curr) => curr === 'b' ? acc + 1 : acc, 0);
+		blocksMap[x][y].amount = bombsAmount;
+		return bombsAmount;
 	};
 	
 	const openNearBlocks = (x, y) => {
