@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import classes from './GameBlock.module.css';
 
-const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, getCloseBombsAmount}) => {
+const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, getCloseBombsAmount, blocksMap, openNearBlocks}) => {
 	const isBomb = element.type === 'b';
 	const [amount, setAmount] = useState(element.amount);
 	const [clicked, setClicked] = useState(element.isClicked);
@@ -14,6 +14,11 @@ const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, g
 		setAmount(aroundBombsAmount);
 	}, [element.type, getCloseBombsAmount]);
 	
+	useEffect(() => {
+		setClicked(element.isClicked)
+	}, [ blocksMap ]);
+	
+	
 	const onBlockClick = event => {
 		if (isBombsShowed) return;
 		if (isFlagSet) return;
@@ -25,6 +30,8 @@ const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, g
 			setIsBoomed(true);
 			onBombClick(event);
 		}
+		
+		openNearBlocks(x, y)
 	};
 	
 	const onContextBlockClick = event => {

@@ -50,8 +50,7 @@ const GameScreen = () => {
 	};
 	
 	const onSetFlagClick = (event, x, y) => {
-		console.log('onContextClick')
-		
+		console.log('onContextClick');
 		console.log(x, y)
 	};
 	
@@ -74,11 +73,83 @@ const GameScreen = () => {
 		return amount;
 	};
 	
+	const openNearBlocks = (x, y) => {
+		const newMap = [...blocksMap];
+		
+		//to left
+		// for (let i = y; i >= 0; i--) {
+		// 	console.log(newMap[x][i]);
+		// 	if (newMap[x][i].type === 'b') {
+		// 		console.log('is a bomb');
+		// 		return false;
+		// 	}
+		// 	if (newMap[x][i].amount > 0 ) {
+		// 		console.log('it has amount');
+		// 		newMap[x][i].isClicked = true;
+		// 		return false;
+		// 	}
+		// 	console.log('it has nothing');
+		// 	newMap[x][i].isClicked = true;
+		// 	setBlocksMap(newMap);
+		// }
+		
+		//to right
+		// for (let i = y; i <= BLOCKS_LINE_AMOUNT -1; i++) {
+		// 	console.log(newMap[x][i]);
+		// 	if (newMap[x][i].type === 'b') {
+		// 		console.log('is a bomb');
+		// 		return false;
+		// 	}
+		// 	if (newMap[x][i].amount > 0 ) {
+		// 		console.log('it has amount');
+		// 		newMap[x][i].isClicked = true;
+		// 		return false;
+		// 	}
+		// 	console.log('it has nothing');
+		// 	newMap[x][i].isClicked = true;
+		// 	setBlocksMap(newMap);
+		// }
+		
+		// to top
+		// for (let i = x; i >= 0; i--) {
+		// 	console.log(newMap[x][i]);
+		// 	if (newMap[i][y].type === 'b') {
+		// 		console.log('is a bomb');
+		// 		return false;
+		// 	}
+		// 	if (newMap[i][y].amount > 0 ) {
+		// 		console.log('it has amount');
+		// 		newMap[i][y].isClicked = true;
+		// 		return false;
+		// 	}
+		// 	console.log('it has nothing');
+		// 	newMap[i][y].isClicked = true;
+		// 	setBlocksMap(newMap);
+		// }
+		
+		// to bottom
+		for (let i = x; i <= BLOCKS_LINE_AMOUNT -1; i++) {
+			console.log(newMap[x][i]);
+			if (newMap[i][y].type === 'b') {
+				console.log('is a bomb');
+				return false;
+			}
+			if (newMap[i][y].amount > 0 ) {
+				console.log('it has amount');
+				newMap[i][y].isClicked = true;
+				return false;
+			}
+			console.log('it has nothing');
+			newMap[i][y].isClicked = true;
+			setBlocksMap(newMap);
+		}
+	};
+	
 	const blocks = blocksMap.map((row, rowIndex) => {
 		return row.map((el, elIndex) =>
 			<GameBlock
-				x={rowIndex} y={elIndex} isBombsShowed={isBombsShowed} getCloseBombsAmount={getCloseBombsAmount}
-				element={el} key={`${rowIndex}_${elIndex}`} onBombClick={onBombClick} onSetFlagClick={onSetFlagClick}
+				x={rowIndex} y={elIndex} isBombsShowed={isBombsShowed} getCloseBombsAmount={getCloseBombsAmount} blocksMap={blocksMap}
+				element={el} key={`${rowIndex}_${elIndex}`} onBombClick={onBombClick} onSetFlagClick={onSetFlagClick} openNearBlocks={openNearBlocks}
 			/>)
 	});
 	
