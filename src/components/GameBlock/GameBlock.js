@@ -45,16 +45,18 @@ const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, g
 	};
 	
 	const bombIcon = isBomb ? <div className={classes.Bomb} /> : null;
-	const flagIcon = isFlagSet ? <div className={classes.Flag} /> : null;
+	const flagIcon = <div className={classes.Flag} />;
 	const amountParagraph = <span>{amount}</span>;
+	const flagAndBombIcon = <span className={classes.flagAndBombIcon}>&#10003;</span>;
 	
 	let backgroundColor = clicked ? '' : '#dbdbdf';
 	backgroundColor = isBoomed ? 'red' : backgroundColor;
 	
 	return (
 		<section className={classes.GameBlock} onClick={onBlockClick} onContextMenu={onContextBlockClick} style={{backgroundColor}}>
-			{isBombsShowed && bombIcon}
-			{isFlagSet && flagIcon}
+			{isBombsShowed && !isFlagSet && bombIcon}
+			{isFlagSet && !isBombsShowed && flagIcon}
+			{isBombsShowed && isFlagSet && flagAndBombIcon}
 			{clicked && !isBoomed && amount !== 0 && amountParagraph}
 		</section>
 	)

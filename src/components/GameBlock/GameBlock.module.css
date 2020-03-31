@@ -8,7 +8,8 @@
     height: 50px;
 
     box-sizing: border-box;
-    border: 1px solid #8c8c8c;
+    border: 1px solid #717171;
+    background-color: #b4b4b4;
 
     cursor: pointer;
     user-select: none;
@@ -30,4 +31,9 @@
     border-left: 10px solid red;
 
     transform: translateX(35%);
+}
+
+.flagAndBombIcon {
+    color: green;
+    font-size: 1.4em;
 }
