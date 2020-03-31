@@ -3,7 +3,7 @@ import classes from './GameBlock.module.css';
 
 const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, getCloseBombsAmount, blocksMap, openNearBlocks}) => {
 	const isBomb = element.type === 'b';
-	const [amount, setAmount] = useState(element.amount);
+	const [amount, setAmount] = useState(element.bombsAround);
 	const [clicked, setClicked] = useState(element.isClicked);
 	const [isFlagSet, setIsFlagSet] = useState(element.isFlagSet);
 	const [isBoomed, setIsBoomed] = useState(false);

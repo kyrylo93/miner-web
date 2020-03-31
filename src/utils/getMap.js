@@ -1,5 +1,3 @@
-export const getRandomNumberInRange = range => Math.floor(Math.random() * range);
-
 export const getMap = amount => {
 	const map = [];
 	for (let i = 0; i < amount; i++) {

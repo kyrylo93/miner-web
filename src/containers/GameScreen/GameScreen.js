@@ -5,10 +5,9 @@ import classes from './GameSrceen.module.css';
 import GameBlock from "../../components/GameBlock/GameBlock";
 
 //  functions
-import { getRandomNumberInRange } from "../../utils/utils";
+import { getRandomNumberInRange } from "../../utils/getRandomNumberInRange";
 
-const GameScreen = ({ map }) => {
-	const BLOCKS_LINE_AMOUNT = 10;
+const GameScreen = ({ map, amount }) => {
 	const [blocksMap, setBlocksMap] = useState(map);
 	
 	const [isBombsShowed, setIsBombsShowed] = useState(false);
@@ -16,9 +15,9 @@ const GameScreen = ({ map }) => {
 	useEffect(() => {
 		// add bombs to map
 		const newMap = [...blocksMap];
-		for (let i = 0; i < BLOCKS_LINE_AMOUNT; i++) {
-			const x = getRandomNumberInRange(BLOCKS_LINE_AMOUNT);
-			const y = getRandomNumberInRange(BLOCKS_LINE_AMOUNT);
+		for (let i = 0; i < amount; i++) {
+			const x = getRandomNumberInRange(amount);
+			const y = getRandomNumberInRange(amount);
 			
 			if (newMap[x][y].type === '-') {
 				newMap[x][y].type = 'b'
@@ -36,7 +35,6 @@ const GameScreen = ({ map }) => {
 	};
 	
 	const onSetFlagClick = (event, x, y) => {
-		console.log(x, y)
 	};
 	
 	const getNextBlock = (x, y, left = 0, right = 0, top = 0, bottom = 0) => {
@@ -55,9 +53,7 @@ const GameScreen = ({ map }) => {
 		const rightBottomElement = getNextBlock(x, y, 0, 1, 0, 1)?.type;
 		
 		const elements = [leftElement, rightElement, topElement, bottomElement, lefTopElement, rightTopElement, lefBottomElement, rightBottomElement];
-		const bombsAmount =  elements.reduce((acc, curr) => curr === 'b' ? acc + 1 : acc, 0);
-		blocksMap[x][y].amount = bombsAmount;
-		return bombsAmount;
+		return elements.reduce((acc, curr) => curr === 'b' ? acc + 1 : acc, 0);
 	};
 	
 	const openNearBlocks = (x, y, map) => {

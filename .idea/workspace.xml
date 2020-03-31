@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="594ebc97-ad87-4b53-b1bd-3b3583df1cf4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/utils/getMap.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/GameBlock/GameBlock.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GameBlock/GameBlock.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/GameScreen/GameScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/GameScreen/GameScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/GameWrapper/GameWrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/GameWrapper/GameWrapper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/getRandomNumberInRange.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +73,7 @@
       <workItem from="1585555051376" duration="1924000" />
       <workItem from="1585558136021" duration="718000" />
       <workItem from="1585648937545" duration="3615000" />
-      <workItem from="1585659508408" duration="712000" />
+      <workItem from="1585659508408" duration="1480000" />
     </task>
     <servers />
   </component>
