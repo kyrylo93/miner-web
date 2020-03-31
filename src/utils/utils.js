@@ -7,7 +7,7 @@ export const getMap = amount => {
 		const row = [];
 		
 		for (let j = 0; j < amount; j++) {
-			row.push({ type: "-", bombsAround: 0, isClicked: false, isFlagSet: false })
+			row.push({ type: "-",x: i, y: j, bombsAround: 0, isClicked: false, isFlagSet: false })
 		}
 		map.push(row);
 	}

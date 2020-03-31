@@ -14,7 +14,6 @@ const GameScreen = ({ map }) => {
 	const [isBombsShowed, setIsBombsShowed] = useState(false);
 	
 	useEffect(() => {
-		console.log(blocksMap);
 		// add bombs to map
 		const newMap = [...blocksMap];
 		for (let i = 0; i < BLOCKS_LINE_AMOUNT; i++) {
@@ -33,13 +32,10 @@ const GameScreen = ({ map }) => {
 	
 	const onBombClick = event => {
 		if (isBombsShowed) return;
-		
-		console.log('onBombClick');
 		setIsBombsShowed(true);
 	};
 	
 	const onSetFlagClick = (event, x, y) => {
-		console.log('onContextClick');
 		console.log(x, y)
 	};
 	
@@ -81,7 +77,14 @@ const GameScreen = ({ map }) => {
 		
 		elements.forEach(el => {
 			if (el) {
-				if (el.type === '-') el.isClicked = true
+				if (el.isClicked || el.isFlagSet) return;
+				
+				console.log(el);
+				if (el.type === '-') {
+					el.isClicked = true;
+					openNearBlocks(x, y)
+				}
+				
 			}
 		});
 		
