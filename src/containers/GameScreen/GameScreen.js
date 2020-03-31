@@ -5,7 +5,7 @@ import classes from './GameSrceen.module.css';
 import GameBlock from "../../components/GameBlock/GameBlock";
 
 //functions
-import { getRandomNumberInRange } from "../../utils/utils";
+import { getRandomNumberInRange, getMap } from "../../utils/utils";
 
 const GameScreen = () => {
 	const BLOCKS_LINE_AMOUNT = 10;
@@ -25,7 +25,7 @@ const GameScreen = () => {
 	const [isBombsShowed, setIsBombsShowed] = useState(false);
 	
 	useEffect(() => {
-		console.log(blocksMap)
+		console.log(blocksMap);
 		// add bombs to map
 		const newMap = [...blocksMap];
 		for (let i = 0; i < BLOCKS_LINE_AMOUNT; i++) {
@@ -78,73 +78,25 @@ const GameScreen = () => {
 	const openNearBlocks = (x, y) => {
 		const newMap = [...blocksMap];
 		
-		//to left
-		// for (let i = y; i >= 0; i--) {
-		// 	console.log(newMap[x][i]);
-		// 	if (newMap[x][i].type === 'b') {
-		// 		console.log('is a bomb');
-		// 		return false;
-		// 	}
-		// 	if (newMap[x][i].amount > 0 ) {
-		// 		console.log('it has amount');
-		// 		newMap[x][i].isClicked = true;
-		// 		return false;
-		// 	}
-		// 	console.log('it has nothing');
-		// 	newMap[x][i].isClicked = true;
-		// 	setBlocksMap(newMap);
-		// }
+		const leftElement = getNextBlock(x, y, 1, 0, 0, 0);
+		const rightElement = getNextBlock(x, y, 0, 1, 0, 0);
+		const topElement = getNextBlock(x, y, 0, 0, 1, 0);
+		const bottomElement = getNextBlock(x, y, 0, 0, 0, 1);
 		
-		//to right
-		// for (let i = y; i <= BLOCKS_LINE_AMOUNT -1; i++) {
-		// 	console.log(newMap[x][i]);
-		// 	if (newMap[x][i].type === 'b') {
-		// 		console.log('is a bomb');
-		// 		return false;
-		// 	}
-		// 	if (newMap[x][i].amount > 0 ) {
-		// 		console.log('it has amount');
-		// 		newMap[x][i].isClicked = true;
-		// 		return false;
-		// 	}
-		// 	console.log('it has nothing');
-		// 	newMap[x][i].isClicked = true;
-		// 	setBlocksMap(newMap);
-		// }
+		const lefTopElement = getNextBlock(x, y, 1, 0, 1, 0);
+		const rightTopElement = getNextBlock(x, y, 0, 1, 1, 0);
+		const lefBottomElement = getNextBlock(x, y, 1, 0, 0, 1);
+		const rightBottomElement = getNextBlock(x, y, 0, 1, 0, 1);
 		
-		// to top
-		// for (let i = x; i >= 0; i--) {
-		// 	console.log(newMap[x][i]);
-		// 	if (newMap[i][y].type === 'b') {
-		// 		console.log('is a bomb');
-		// 		return false;
-		// 	}
-		// 	if (newMap[i][y].amount > 0 ) {
-		// 		console.log('it has amount');
-		// 		newMap[i][y].isClicked = true;
-		// 		return false;
-		// 	}
-		// 	console.log('it has nothing');
-		// 	newMap[i][y].isClicked = true;
-		// 	setBlocksMap(newMap);
-		// }
+		const elements = [leftElement, rightElement, topElement, bottomElement, lefTopElement, rightTopElement, lefBottomElement, rightBottomElement];
 		
-		// to bottom
-		for (let i = x; i <= BLOCKS_LINE_AMOUNT -1; i++) {
-			console.log(newMap[x][i]);
-			if (newMap[i][y].type === 'b') {
-				console.log('is a bomb');
-				return false;
+		elements.forEach(el => {
+			if (el) {
+				if (el.type === '-') el.isClicked = true
 			}
-			if (newMap[i][y].amount > 0 ) {
-				console.log('it has amount');
-				newMap[i][y].isClicked = true;
-				return false;
-			}
-			console.log('it has nothing');
-			newMap[i][y].isClicked = true;
-			setBlocksMap(newMap);
-		}
+		});
+		
+		setBlocksMap(newMap);
 	};
 	
 	const blocks = blocksMap.map((row, rowIndex) => {
