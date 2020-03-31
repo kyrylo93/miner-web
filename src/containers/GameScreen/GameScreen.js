@@ -60,8 +60,8 @@ const GameScreen = ({ map }) => {
 		return bombsAmount;
 	};
 	
-	const openNearBlocks = (x, y) => {
-		const newMap = [...blocksMap];
+	const openNearBlocks = (x, y, map) => {
+		const newMap = map ? [...map] : [...blocksMap];
 		
 		const leftElement = getNextBlock(x, y, 1, 0, 0, 0);
 		const rightElement = getNextBlock(x, y, 0, 1, 0, 0);
@@ -78,13 +78,15 @@ const GameScreen = ({ map }) => {
 		elements.forEach(el => {
 			if (el) {
 				if (el.isClicked || el.isFlagSet) return;
-				
-				console.log(el);
-				if (el.type === '-') {
+				if (el.type === 'b') return;
+			
+				if (el.bombsAround > 0) {
 					el.isClicked = true;
-					openNearBlocks(x, y)
+					return;
 				}
 				
+				el.isClicked = true;
+				openNearBlocks(el.x, el.y, newMap)
 			}
 		});
 		
