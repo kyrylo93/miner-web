@@ -8,6 +8,7 @@ import GameBlock from "../../components/GameBlock/GameBlock";
 import { getRandomNumberInRange } from "../../utils/getRandomNumberInRange";
 
 const GameScreen = ({ map, amount, setIsWin, setIsDefeat }) => {
+	const [flagsAmount, setFlagsAmount] = useState(0);
 	const [blocksMap, setBlocksMap] = useState(map);
 	const [bombsStates, setBombsStates] = useState([]);
 	const [isBombsShowed, setIsBombsShowed] = useState(false);
@@ -39,8 +40,10 @@ const GameScreen = ({ map, amount, setIsWin, setIsDefeat }) => {
 		setIsDefeat(true);
 	};
 	
-	const onSetFlagClick = () => {
-		// if flags less then amount return false
+	const onSetFlagClick = (isPlusOne) => {
+		isPlusOne ? setFlagsAmount(flagsAmount + 1) : setFlagsAmount(flagsAmount - 1);
+		
+		if (flagsAmount < amount) return;
 		const checked = bombsStates.filter(el => el.isFlagSet);
 		if (checked.length === amount) {
 			setIsBombsShowed(true);
@@ -103,14 +106,18 @@ const GameScreen = ({ map, amount, setIsWin, setIsDefeat }) => {
 	const blocks = blocksMap.map((row, rowIndex) => {
 		return row.map((el, elIndex) =>
 			<GameBlock
-				x={rowIndex} y={elIndex} isBombsShowed={isBombsShowed} getCloseBombsAmount={getCloseBombsAmount} blocksMap={blocksMap}
-				element={el} key={`${rowIndex}_${elIndex}`} onBombClick={onBombClick} onSetFlagClick={onSetFlagClick} openNearBlocks={openNearBlocks}
+				x={rowIndex} y={elIndex} isBombsShowed={isBombsShowed} getCloseBombsAmount={getCloseBombsAmount}
+				amount={amount} blocksMap={blocksMap} flagsAmount={flagsAmount} openNearBlocks={openNearBlocks}
+				element={el} key={`${rowIndex}_${elIndex}`} onBombClick={onBombClick} onSetFlagClick={onSetFlagClick}
 			/>)
 	});
 	
 	return (
-		<section className={classes.GameScreen}>
-			{ blocks }
+		<section>
+			<p>flags : {flagsAmount}</p>
+			<section className={classes.GameScreen}>
+				{ blocks }
+			</section>
 		</section>
 	)
 };

@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import classes from './GameBlock.module.css';
 
-const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, getCloseBombsAmount, blocksMap, openNearBlocks}) => {
+const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, getCloseBombsAmount, blocksMap, openNearBlocks, amount, flagsAmount}) => {
 	const isBomb = element.type === 'b';
-	const [amount, setAmount] = useState(element.bombsAround);
+	const [bombsAmount, setAmount] = useState(element.bombsAround);
 	const [clicked, setClicked] = useState(element.isClicked);
 	const [isFlagSet, setIsFlagSet] = useState(element.isFlagSet);
 	const [isBoomed, setIsBoomed] = useState(false);
@@ -41,17 +41,18 @@ const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, g
 	
 	const onContextBlockClick = event => {
 		event.preventDefault();
+		if (flagsAmount >= amount) return;
 		if (isBombsShowed) return;
 		if (clicked) return;
 		
 		element.isFlagSet = !isFlagSet;
 		setIsFlagSet(!isFlagSet);
-		onSetFlagClick();
+		onSetFlagClick(element.isFlagSet);
 	};
 	
 	const bombIcon = isBomb ? <div className={classes.Bomb} /> : null;
 	const flagIcon = <div className={classes.Flag} />;
-	const amountParagraph = <span>{amount}</span>;
+	const amountParagraph = <span>{bombsAmount}</span>;
 	const flagAndBombIcon = <span className={classes.flagAndBombIcon}>&#10003;</span>;
 	
 	let backgroundColor = clicked ? '' : '#e1e1e5';
@@ -62,7 +63,7 @@ const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, g
 			{isBombsShowed && !isFlagSet && bombIcon}
 			{isFlagSet && !isBombsShowed && flagIcon}
 			{isBombsShowed && isFlagSet && flagAndBombIcon}
-			{clicked && !isBoomed && !isBomb && amount !== 0 && amountParagraph}
+			{clicked && !isBoomed && !isBomb && bombsAmount !== 0 && amountParagraph}
 		</section>
 	)
 };
