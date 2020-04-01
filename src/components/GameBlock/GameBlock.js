@@ -15,7 +15,12 @@ const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, g
 	}, [element.type, getCloseBombsAmount]);
 	
 	useEffect(() => {
-		setClicked(element.isClicked)
+		setClicked(element.isClicked);
+		
+		if (isBombsShowed) {
+			element.isClicked = true;
+			setClicked(element.isClicked);
+		}
 	}, [blocksMap]);
 	
 	
@@ -41,7 +46,7 @@ const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, g
 		
 		element.isFlagSet = !isFlagSet;
 		setIsFlagSet(!isFlagSet);
-		onSetFlagClick(event, x, y);
+		onSetFlagClick();
 	};
 	
 	const bombIcon = isBomb ? <div className={classes.Bomb} /> : null;
@@ -57,7 +62,7 @@ const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, g
 			{isBombsShowed && !isFlagSet && bombIcon}
 			{isFlagSet && !isBombsShowed && flagIcon}
 			{isBombsShowed && isFlagSet && flagAndBombIcon}
-			{clicked && !isBoomed && amount !== 0 && amountParagraph}
+			{clicked && !isBoomed && !isBomb && amount !== 0 && amountParagraph}
 		</section>
 	)
 };

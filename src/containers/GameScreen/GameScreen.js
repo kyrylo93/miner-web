@@ -7,34 +7,45 @@ import GameBlock from "../../components/GameBlock/GameBlock";
 //  functions
 import { getRandomNumberInRange } from "../../utils/getRandomNumberInRange";
 
-const GameScreen = ({ map, amount }) => {
+const GameScreen = ({ map, amount, setIsWin, setIsDefeat }) => {
 	const [blocksMap, setBlocksMap] = useState(map);
-	
+	const [bombsStates, setBombsStates] = useState([]);
 	const [isBombsShowed, setIsBombsShowed] = useState(false);
 	
 	useEffect(() => {
 		// add bombs to map
 		const newMap = [...blocksMap];
+		const bombsList = [];
+		
 		for (let i = 0; i < amount; i++) {
 			const x = getRandomNumberInRange(amount);
 			const y = getRandomNumberInRange(amount);
 			
 			if (newMap[x][y].type === '-') {
-				newMap[x][y].type = 'b'
+				newMap[x][y].type = 'b';
+				bombsList.push(newMap[x][y]);
 			} else {
 				i--
 			}
 		}
 		
+		setBombsStates(bombsList);
 		setBlocksMap(newMap);
 	}, []);
 	
 	const onBombClick = event => {
 		if (isBombsShowed) return;
 		setIsBombsShowed(true);
+		setIsDefeat(true);
 	};
 	
-	const onSetFlagClick = (event, x, y) => {
+	const onSetFlagClick = () => {
+		// if flags less then amount return false
+		const checked = bombsStates.filter(el => el.isFlagSet);
+		if (checked.length === amount) {
+			setIsBombsShowed(true);
+			setIsWin(true);
+		}
 	};
 	
 	const getNextBlock = (x, y, left = 0, right = 0, top = 0, bottom = 0) => {
