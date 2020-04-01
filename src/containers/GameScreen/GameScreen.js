@@ -7,7 +7,7 @@ import GameBlock from "../../components/GameBlock/GameBlock";
 //  functions
 import { getRandomNumberInRange } from "../../utils/getRandomNumberInRange";
 
-const GameScreen = ({ map, amount, setIsWin, setIsDefeat }) => {
+const GameScreen = ({ map, amount, setIsWin, setIsDefeat, width, height }) => {
 	const [flagsAmount, setFlagsAmount] = useState(0);
 	const [blocksMap, setBlocksMap] = useState(map);
 	const [bombsStates, setBombsStates] = useState([]);
@@ -19,8 +19,8 @@ const GameScreen = ({ map, amount, setIsWin, setIsDefeat }) => {
 		const bombsList = [];
 		
 		for (let i = 0; i < amount; i++) {
-			const x = getRandomNumberInRange(amount);
-			const y = getRandomNumberInRange(amount);
+			const x = getRandomNumberInRange(height);
+			const y = getRandomNumberInRange(width);
 			
 			if (newMap[x][y].type === '-') {
 				newMap[x][y].type = 'b';
@@ -73,6 +73,7 @@ const GameScreen = ({ map, amount, setIsWin, setIsDefeat }) => {
 	const openNearBlocks = (x, y, map) => {
 		const newMap = map ? [...map] : [...blocksMap];
 		
+		const currElement = getNextBlock(x, y, 0, 0, 0, 0);
 		const leftElement = getNextBlock(x, y, 1, 0, 0, 0);
 		const rightElement = getNextBlock(x, y, 0, 1, 0, 0);
 		const topElement = getNextBlock(x, y, 0, 0, 1, 0);
@@ -82,6 +83,11 @@ const GameScreen = ({ map, amount, setIsWin, setIsDefeat }) => {
 		const rightTopElement = getNextBlock(x, y, 0, 1, 1, 0);
 		const lefBottomElement = getNextBlock(x, y, 1, 0, 0, 1);
 		const rightBottomElement = getNextBlock(x, y, 0, 1, 0, 1);
+		
+		if (currElement.bombsAround > 0) {
+			currElement.isClicked = true;
+			return;
+		}
 		
 		const elements = [leftElement, rightElement, topElement, bottomElement, lefTopElement, rightTopElement, lefBottomElement, rightBottomElement];
 		
@@ -115,7 +121,7 @@ const GameScreen = ({ map, amount, setIsWin, setIsDefeat }) => {
 	return (
 		<section>
 			<p>flags : {flagsAmount}</p>
-			<section className={classes.GameScreen}>
+			<section className={classes.GameScreen} style={{width: `${width * 20}px`, height: `${height * 20}px`}}>
 				{ blocks }
 			</section>
 		</section>
