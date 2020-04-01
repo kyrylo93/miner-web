@@ -3,8 +3,14 @@ import GameScreen from "../GameScreen/GameScreen";
 import { getMap } from "../../utils/getMap";
 
 const GameWrapper = () => {
-	const map = getMap(10);
-	return <GameScreen map={map} amount={10} />
+	const bombsAmount = 10;
+	const map = getMap(bombsAmount);
+	return (
+		<section style={{marginTop: '2%'}}>
+			<section><span>Bombs: {bombsAmount}</span></section>
+			<GameScreen map={map} amount={bombsAmount} />
+		</section>
+		)
 };
 
 export default GameWrapper;

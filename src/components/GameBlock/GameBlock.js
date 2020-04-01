@@ -16,7 +16,7 @@ const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, g
 	
 	useEffect(() => {
 		setClicked(element.isClicked)
-	}, [ blocksMap ]);
+	}, [blocksMap]);
 	
 	
 	const onBlockClick = event => {
@@ -49,7 +49,7 @@ const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, g
 	const amountParagraph = <span>{amount}</span>;
 	const flagAndBombIcon = <span className={classes.flagAndBombIcon}>&#10003;</span>;
 	
-	let backgroundColor = clicked ? '' : '#dbdbdf';
+	let backgroundColor = clicked ? '' : '#e1e1e5';
 	backgroundColor = isBoomed ? 'red' : backgroundColor;
 	
 	return (
