@@ -1,27 +1,13 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import GameScreen from "../GameScreen/GameScreen";
 import { getMap } from "../../utils/getMap";
 
-const GameWrapper = () => {
-	const level = {
-		beginner: {
-			bombs: 10,
-			width: 9,
-			height: 9
-		},
-		middle: {
-			bombs: 40,
-			width: 16,
-			height: 16
-		},
-		hard: {
-			bombs: 99,
-			width: 30,
-			height: 16
-		}
-	};
+const GameWrapper = ({difficult}) => {
+	const [currentLevel, setCurrentLevel] = useState(difficult);
 	
-	const currentLevel = level.beginner;
+	useEffect(() => {
+		setCurrentLevel(difficult)
+	}, [difficult]);
 	
 	const map = getMap(currentLevel.width, currentLevel.height);
 	const [isWin, setIsWin] = useState(false);

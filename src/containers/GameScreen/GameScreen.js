@@ -32,6 +32,7 @@ const GameScreen = ({ map, amount, setIsWin, setIsDefeat, width, height }) => {
 		
 		setBombsStates(bombsList);
 		setBlocksMap(newMap);
+		console.log(newMap)
 	}, []);
 	
 	const onBombClick = event => {
