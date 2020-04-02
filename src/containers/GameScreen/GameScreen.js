@@ -32,7 +32,6 @@ const GameScreen = ({ map, amount, setIsWin, setIsDefeat, width, height }) => {
 		
 		setBombsStates(bombsList);
 		setBlocksMap(newMap);
-		console.log(newMap)
 	}, []);
 	
 	const onBombClick = event => {
@@ -44,7 +43,8 @@ const GameScreen = ({ map, amount, setIsWin, setIsDefeat, width, height }) => {
 	const onSetFlagClick = (isPlusOne) => {
 		isPlusOne ? setFlagsAmount(flagsAmount + 1) : setFlagsAmount(flagsAmount - 1);
 		
-		if (flagsAmount < amount) return;
+		if (flagsAmount < amount -1) return;
+		
 		const checked = bombsStates.filter(el => el.isFlagSet);
 		if (checked.length === amount) {
 			setIsBombsShowed(true);
