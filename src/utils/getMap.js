@@ -1,5 +1,4 @@
 export const getMap = (width, height) => {
-	console.log(width, height)
 	const map = [];
 	for (let i = 0; i < height; i++) {
 		
@@ -10,6 +9,5 @@ export const getMap = (width, height) => {
 		}
 		map.push(row);
 	}
-	
 	return map
 };

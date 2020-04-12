@@ -19,11 +19,15 @@ const Game = () => {
 			height: 16
 		}
 	};
+
+	const changeLevel = event => {
+		setSelectValue(LEVELS[event.target.value])
+	};
 	
 	const [selectValue, setSelectValue] = useState(LEVELS.beginner);
 	return (
 		<section>
-			<select onChange={(event) => setSelectValue(LEVELS[event.target.value])} style={{marginTop: '2%'}}>
+			<select onChange={changeLevel} style={{marginTop: '2%'}}>
 				<option value="beginner">beginner</option>
 				<option value="middle">middle</option>
 				<option value="hard">hard</option>

@@ -1,40 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import classes from './GameSrceen.module.css';
 
 //  components
 import GameBlock from "../../components/GameBlock/GameBlock";
 
-//  functions
-import { getRandomNumberInRange } from "../../utils/getRandomNumberInRange";
-
-const GameScreen = ({ map, amount, setIsWin, setIsDefeat, width, height }) => {
-	const [flagsAmount, setFlagsAmount] = useState(0);
+const GameScreen = ({ map, amount, setIsWin, setIsDefeat, width, height, bombsList }) => {
 	const [blocksMap, setBlocksMap] = useState(map);
-	const [bombsStates, setBombsStates] = useState([]);
+	const [flagsAmount, setFlagsAmount] = useState(0);
 	const [isBombsShowed, setIsBombsShowed] = useState(false);
-	
-	useEffect(() => {
-		// add bombs to map
-		const newMap = [...blocksMap];
-		const bombsList = [];
-		
-		for (let i = 0; i < amount; i++) {
-			const x = getRandomNumberInRange(height);
-			const y = getRandomNumberInRange(width);
-			
-			if (newMap[x][y].type === '-') {
-				newMap[x][y].type = 'b';
-				bombsList.push(newMap[x][y]);
-			} else {
-				i--
-			}
-		}
-		
-		setBombsStates(bombsList);
-		setBlocksMap(newMap);
-	}, []);
-	
-	const onBombClick = event => {
+
+	const onBombClick = () => {
 		if (isBombsShowed) return;
 		setIsBombsShowed(true);
 		setIsDefeat(true);
@@ -45,7 +20,7 @@ const GameScreen = ({ map, amount, setIsWin, setIsDefeat, width, height }) => {
 		
 		if (flagsAmount < amount -1) return;
 		
-		const checked = bombsStates.filter(el => el.isFlagSet);
+		const checked = bombsList.filter(el => el.isFlagSet);
 		if (checked.length === amount) {
 			setIsBombsShowed(true);
 			setIsWin(true);
