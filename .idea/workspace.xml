@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="594ebc97-ad87-4b53-b1bd-3b3583df1cf4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/getMapWithBombs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Game/Game.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Game/Game.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/GameScreen/GameScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/GameScreen/GameScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/GameWrapper/GameWrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/GameWrapper/GameWrapper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/getMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/getMap.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,10 +86,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1585233534320" />
-    <state x="301" y="175" width="837" height="550" key="find.popup" timestamp="1586702566784">
+    <state x="301" y="175" width="837" height="550" key="find.popup" timestamp="1586704743401">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="301" y="175" width="837" height="550" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1586702566784" />
+    <state x="301" y="175" width="837" height="550" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1586704743401" />
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1585725754053">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

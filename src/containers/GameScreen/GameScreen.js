@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import classes from './GameSrceen.module.css';
 
 //  components
@@ -8,6 +8,12 @@ const GameScreen = ({ map, amount, setIsWin, setIsDefeat, width, height, bombsLi
 	const [blocksMap, setBlocksMap] = useState(map);
 	const [flagsAmount, setFlagsAmount] = useState(0);
 	const [isBombsShowed, setIsBombsShowed] = useState(false);
+
+	useEffect(() => {
+		setFlagsAmount(0);
+		setIsBombsShowed(false);
+		setBlocksMap(map);
+	}, [map]);
 
 	const onBombClick = () => {
 		if (isBombsShowed) return;
@@ -30,7 +36,7 @@ const GameScreen = ({ map, amount, setIsWin, setIsDefeat, width, height, bombsLi
 	const getNextBlock = (x, y, left = 0, right = 0, top = 0, bottom = 0) => {
 		return blocksMap?.[x - top + bottom]?.[y - left + right]
 	};
-	
+
 	const getCloseBombsAmount = (x, y) => {
 		const leftElement = getNextBlock(x, y, 1, 0, 0, 0)?.type;
 		const rightElement = getNextBlock(x, y, 0, 1, 0, 0)?.type;
@@ -84,7 +90,7 @@ const GameScreen = ({ map, amount, setIsWin, setIsDefeat, width, height, bombsLi
 		
 		setBlocksMap(newMap);
 	};
-	
+
 	const blocks = blocksMap.map((row, rowIndex) => {
 		return row.map((el, elIndex) =>
 			<GameBlock

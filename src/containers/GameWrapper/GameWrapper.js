@@ -4,25 +4,26 @@ import { getMap } from "../../utils/getMap";
 import {getMapWithBombs} from "../../utils/getMapWithBombs";
 
 const GameWrapper = ({difficult}) => {
-	const [currentLevel, setCurrentLevel] = useState(difficult);
-	
-	useEffect(() => {
-		setCurrentLevel(difficult)
-	}, [difficult]);
-	
-	const map = getMap(currentLevel.width, currentLevel.height);
-
-	// add bombs to map
-	const [bombsList, newMap] = getMapWithBombs(map, currentLevel.bombs, currentLevel.height, currentLevel.width);
-
-
 	const [isWin, setIsWin] = useState(false);
 	const [isDefeat, setIsDefeat] = useState(false);
+	const [map, setMap] = useState([]);
+	const [bombsList, setBombsList] = useState([]);
+
+	const { width, height, bombs } = difficult;
+
+	useEffect(() => {
+		const createdMap = getMap(width, height);
+		const [bombsList, newMap] = getMapWithBombs(createdMap, bombs, height, width);
+
+		setMap(newMap);
+		setBombsList(bombsList);
+	}, [ difficult ]);
+
 	return (
 		<section style={{marginTop: '2%'}}>
-			<section><span>Bombs: {currentLevel.bombs}</span></section>
-			<GameScreen map={newMap} amount={currentLevel.bombs}
-						width={currentLevel.width} height={currentLevel.height}
+			<section><span>Bombs: {bombs}</span></section>
+			<GameScreen map={map} amount={bombs}
+						width={width} height={height}
 						setIsWin={setIsWin} setIsDefeat={setIsDefeat}
 						bombsList={bombsList} />
 			{ isWin && <h2>You are win!</h2>}
