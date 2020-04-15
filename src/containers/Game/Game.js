@@ -1,30 +1,16 @@
-import React, {useState} from "react";
+import React, { useState, useContext } from "react";
 import GameWrapper from "../GameWrapper/GameWrapper";
+import { difficultContext } from "../../context/DifficultContext";
 
 const Game = () => {
-	const LEVELS = {
-		beginner: {
-			bombs: 10,
-			width: 9,
-			height: 9
-		},
-		middle: {
-			bombs: 40,
-			width: 16,
-			height: 16
-		},
-		hard: {
-			bombs: 99,
-			width: 30,
-			height: 16
-		}
-	};
+	const { difficult, setDifficult, LEVELS } = useContext(difficultContext);
+	const [selectValue, setSelectValue] = useState(LEVELS[difficult]);
 
 	const changeLevel = event => {
-		setSelectValue(LEVELS[event.target.value])
+		setSelectValue(LEVELS[event.target.value]);
+		setDifficult(event.target.value);
 	};
-	
-	const [selectValue, setSelectValue] = useState(LEVELS.beginner);
+
 	return (
 		<section>
 			<select onChange={changeLevel} style={{marginTop: '2%'}}>

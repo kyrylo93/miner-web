@@ -4,10 +4,10 @@ import { getMap } from "../../utils/getMap";
 import {getMapWithBombs} from "../../utils/getMapWithBombs";
 
 const GameWrapper = ({difficult}) => {
-	const [isWin, setIsWin] = useState(false);
-	const [isDefeat, setIsDefeat] = useState(false);
 	const [map, setMap] = useState([]);
+	const [isWin, setIsWin] = useState(false);
 	const [bombsList, setBombsList] = useState([]);
+	const [isDefeat, setIsDefeat] = useState(false);
 
 	const { width, height, bombs } = difficult;
 
@@ -15,6 +15,8 @@ const GameWrapper = ({difficult}) => {
 		const createdMap = getMap(width, height);
 		const [bombsList, newMap] = getMapWithBombs(createdMap, bombs, height, width);
 
+		setIsWin(false)
+		setIsDefeat(false)
 		setMap(newMap);
 		setBombsList(bombsList);
 	}, [ difficult ]);

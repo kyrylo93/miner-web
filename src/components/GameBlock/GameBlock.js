@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useContext} from "react";
 import classes from './GameBlock.module.css';
+import { difficultContext } from "../../context/DifficultContext";
 
 const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, getCloseBombsAmount, blocksMap, openNearBlocks, amount, flagsAmount}) => {
 	const isBomb = element.type === 'b';
@@ -7,7 +8,15 @@ const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, g
 	const [clicked, setClicked] = useState(element.isClicked);
 	const [isFlagSet, setIsFlagSet] = useState(element.isFlagSet);
 	const [isBoomed, setIsBoomed] = useState(false);
-	
+
+	const { difficult } = useContext(difficultContext);
+
+	useEffect(() => {
+		setAmount(0);
+		setClicked(false);
+		setIsFlagSet(false)
+	}, [ difficult ]);
+
 	useEffect(() => {
 		const aroundBombsAmount = getCloseBombsAmount(x, y);
 		element.bombsAround = aroundBombsAmount;
@@ -22,8 +31,7 @@ const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, g
 			setClicked(element.isClicked);
 		}
 	}, [blocksMap]);
-	
-	
+
 	const onBlockClick = event => {
 		if (isBombsShowed) return;
 		if (isFlagSet) return;
@@ -58,7 +66,12 @@ const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, g
 	
 	let backgroundColor = clicked ? '' : '#e1e1e5';
 	backgroundColor = isBoomed ? 'red' : backgroundColor;
-	
+
+	if (isFlagSet) {
+		console.log('isFlagSet', isFlagSet)
+		console.log('x, y', {x, y})
+	}
+
 	return (
 		<section className={classes.GameBlock} onClick={onBlockClick} onContextMenu={onContextBlockClick} style={{backgroundColor}}>
 			{isBombsShowed && !isFlagSet && bombIcon}
