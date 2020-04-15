@@ -15,6 +15,8 @@ const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, g
 		setAmount(0);
 		setClicked(false);
 		setIsFlagSet(false)
+
+		return () => setIsBoomed(false)
 	}, [ difficult ]);
 
 	useEffect(() => {
@@ -22,10 +24,10 @@ const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, g
 		element.bombsAround = aroundBombsAmount;
 		setAmount(aroundBombsAmount);
 	}, [element.type, getCloseBombsAmount]);
-	
+
 	useEffect(() => {
 		setClicked(element.isClicked);
-		
+
 		if (isBombsShowed) {
 			element.isClicked = true;
 			setClicked(element.isClicked);
@@ -35,42 +37,37 @@ const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, g
 	const onBlockClick = event => {
 		if (isBombsShowed) return;
 		if (isFlagSet) return;
-		
+
 		setClicked(true);
 		element.isClicked = true;
-		
+
 		if (isBomb) {
 			setIsBoomed(true);
 			onBombClick(event);
 		}
-		
+
 		openNearBlocks(x, y)
 	};
-	
+
 	const onContextBlockClick = event => {
 		event.preventDefault();
 		if (flagsAmount >= amount) return;
 		if (isBombsShowed) return;
 		if (clicked) return;
-		
+
 		element.isFlagSet = !isFlagSet;
 		setIsFlagSet(!isFlagSet);
 		onSetFlagClick(element.isFlagSet);
 	};
-	
+
 	const bombIcon = isBomb ? <div className={classes.Bomb} /> : null;
 	const flagIcon = <div className={classes.Flag} />;
 	const amountParagraph = <span>{bombsAmount}</span>;
 	const flagAndBombIcon = <span className={classes.FlagAndBombIcon}>&#10003;</span>;
 	const mistakeIcon = <span className={classes.FalseFlag}>&#215;</span>;
-	
+
 	let backgroundColor = clicked ? '' : '#e1e1e5';
 	backgroundColor = isBoomed ? 'red' : backgroundColor;
-
-	if (isFlagSet) {
-		console.log('isFlagSet', isFlagSet)
-		console.log('x, y', {x, y})
-	}
 
 	return (
 		<section className={classes.GameBlock} onClick={onBlockClick} onContextMenu={onContextBlockClick} style={{backgroundColor}}>
