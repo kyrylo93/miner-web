@@ -7,8 +7,12 @@ const Game = () => {
 	const [selectValue, setSelectValue] = useState(LEVELS[difficult]);
 
 	const changeLevel = event => {
-		setSelectValue(LEVELS[event.target.value]);
-		setDifficult(event.target.value);
+		const value = event.target.value
+
+		setSelectValue(LEVELS[value]);
+		setDifficult(value);
+
+		localStorage.setItem('difficult', value);
 	};
 
 	return (

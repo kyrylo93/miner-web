@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-
 export const difficultContext = React.createContext();
 
 const DifficultContextProvider = ({ children }) => {
-    const [difficult, setDifficult] = useState('beginner');
+    const localDiff = localStorage.getItem('difficult')
+    const [difficult, setDifficult] = useState(localDiff ? localDiff : 'beginner');
 
     const LEVELS = {
         beginner: {

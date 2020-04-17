@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="594ebc97-ad87-4b53-b1bd-3b3583df1cf4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/GameBlock/GameBlock.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GameBlock/GameBlock.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Game/Game.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Game/Game.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/context/DifficultContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/context/DifficultContext.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,6 +73,7 @@
       <workItem from="1585648937545" duration="3615000" />
       <workItem from="1585659508408" duration="7884000" />
       <workItem from="1586964943376" duration="280000" />
+      <workItem from="1587136738882" duration="330000" />
     </task>
     <servers />
   </component>
@@ -87,10 +88,14 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1585233534320" />
-    <state x="301" y="175" width="837" height="550" key="find.popup" timestamp="1586708313662">
+    <state x="508" y="371" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587137068818">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="508" y="371" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.877@0.23.1440.877" timestamp="1587137068818" />
+    <state x="301" y="175" width="837" height="550" key="find.popup" timestamp="1587136943291">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="301" y="175" width="837" height="550" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1586708313662" />
+    <state x="301" y="175" width="837" height="550" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1587136943291" />
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1585725754053">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
