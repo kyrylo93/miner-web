@@ -5,27 +5,16 @@ const Timer = () => {
     const { sessionsTimeStamp } = useContext(difficultContext);
     const [time, setTime] = useState(0)
 
-    let timer = null
+    useEffect(() => {
+        let timer = setTimeout(() => {
+            setTime(time + 1)
+        }, 1000);
+        return () => clearTimeout(timer)
+    }, [time])
 
     useEffect(() => {
-        // clearTimeout(timer);
-        timer = getTimeout(false)
-    }, [ ])
-
-    // useEffect(() => {
-    //     console.log('start')
-    //     timer = getTimeout(false)
-    //
-    // }, [time])
-
-
-
-    const getTimeout = (newTime) => {
-        return setTimeout(() => {
-            let currTime = newTime ? 0 : time + 1;
-            setTime(currTime);
-        }, 1000)
-    }
+        setTime(0)
+    }, [ sessionsTimeStamp ])
 
     return (
         <section style={{marginTop: '3%'}}>
