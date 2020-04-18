@@ -3,7 +3,7 @@ import {difficultContext} from "../../context/DifficultContext";
 
 const Timer = ({ isTimerContinue }) => {
     const [time, setTime] = useState(0)
-    const { sessionsTimeStamp } = useContext(difficultContext);
+    const { sessionTimeStamp } = useContext(difficultContext);
 
     useEffect(() => {
         let timer = null;
@@ -16,7 +16,7 @@ const Timer = ({ isTimerContinue }) => {
 
     useEffect(() => {
         setTime(0)
-    }, [sessionsTimeStamp])
+    }, [sessionTimeStamp])
 
     return (
         <section style={{marginTop: '3%'}}>

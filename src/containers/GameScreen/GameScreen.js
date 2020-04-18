@@ -1,17 +1,19 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import classes from './GameSrceen.module.css';
 import GameBlock from "../../components/GameBlock/GameBlock";
+import {difficultContext} from "../../context/DifficultContext";
 
 const GameScreen = ({ map, amount, setIsWin, setIsDefeat, width, height, bombsList, setIsTimerContinue }) => {
 	const [blocksMap, setBlocksMap] = useState(map);
 	const [flagsAmount, setFlagsAmount] = useState(0);
 	const [isBombsShowed, setIsBombsShowed] = useState(false);
+	const { sessionTimeStamp } = useContext(difficultContext);
 
 	useEffect(() => {
 		setFlagsAmount(0);
 		setIsBombsShowed(false);
 		setBlocksMap(map);
-	}, [map]);
+	}, [map, sessionTimeStamp]);
 
 	const onBombClick = () => {
 		if (isBombsShowed) return;

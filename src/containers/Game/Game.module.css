@@ -1,0 +1,14 @@
+.TopElements {
+    display: flex;
+    justify-content: space-around;
+    padding: 1% 40%;
+}
+
+.Game select {
+    height: 20px;
+}
+
+.Game button {
+    height: 21px;
+    margin-top: -1px;
+}

@@ -4,7 +4,8 @@ export const difficultContext = React.createContext();
 const DifficultContextProvider = ({ children }) => {
     const localDiff = localStorage.getItem('difficult')
     const [difficult, setDifficult] = useState(localDiff ? localDiff : 'beginner');
-    const [sessionsTimeStamp, setSessionTimestamp] = useState(Date.now())
+    const [sessionTimeStamp, setSessionTimestamp] = useState(Date.now())
+    const [restartStamp, setRestartStamp] = useState(Date.now());
 
     const LEVELS = {
         beginner: {
@@ -24,7 +25,7 @@ const DifficultContextProvider = ({ children }) => {
         }
     };
 
-    return <difficultContext.Provider children={children} value={{ difficult, setDifficult, LEVELS, sessionsTimeStamp, setSessionTimestamp }} />
+    return <difficultContext.Provider children={children} value={{ difficult, setDifficult, LEVELS, sessionTimeStamp, setSessionTimestamp, restartStamp, setRestartStamp }} />
 };
 
 export default DifficultContextProvider;
