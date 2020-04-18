@@ -9,13 +9,14 @@ const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, g
 	const [isFlagSet, setIsFlagSet] = useState(element.isFlagSet);
 	const [bombsAmount, setAmount] = useState(element.bombsAround);
 
-	const { difficult } = useContext(difficultContext);
+	const { difficult, setSessionTimestamp } = useContext(difficultContext);
 
 	useEffect(() => {
 		setAmount(0);
 		setClicked(false);
 		setIsFlagSet(false)
 		setIsBoomed(false)
+		setSessionTimestamp(Date.now())
 	}, [ difficult ]);
 
 	useEffect(() => {
