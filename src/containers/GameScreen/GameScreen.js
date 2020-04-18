@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import classes from './GameSrceen.module.css';
 import GameBlock from "../../components/GameBlock/GameBlock";
 
-const GameScreen = ({ map, amount, setIsWin, setIsDefeat, width, height, bombsList }) => {
+const GameScreen = ({ map, amount, setIsWin, setIsDefeat, width, height, bombsList, setIsTimerContinue }) => {
 	const [blocksMap, setBlocksMap] = useState(map);
 	const [flagsAmount, setFlagsAmount] = useState(0);
 	const [isBombsShowed, setIsBombsShowed] = useState(false);
@@ -15,6 +15,7 @@ const GameScreen = ({ map, amount, setIsWin, setIsDefeat, width, height, bombsLi
 
 	const onBombClick = () => {
 		if (isBombsShowed) return;
+		setIsTimerContinue(false);
 		setIsBombsShowed(true);
 		setIsDefeat(true);
 	};

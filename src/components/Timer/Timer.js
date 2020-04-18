@@ -1,14 +1,17 @@
 import React, {useState, useContext, useEffect} from "react";
 import {difficultContext} from "../../context/DifficultContext";
 
-const Timer = () => {
+const Timer = ({ isTimerContinue }) => {
     const { sessionsTimeStamp } = useContext(difficultContext);
+
     const [time, setTime] = useState(0)
 
     useEffect(() => {
-        let timer = setTimeout(() => {
-            setTime(time + 1)
-        }, 1000);
+        let timer = null;
+
+        if (isTimerContinue) {
+            timer = setTimeout(() => { setTime(time + 1) }, 1000);
+        }
         return () => clearTimeout(timer)
     }, [time])
 
