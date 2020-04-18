@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="594ebc97-ad87-4b53-b1bd-3b3583df1cf4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/GameBlock/GameBlock.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GameBlock/GameBlock.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Timer/Timer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timer/Timer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Game/Game.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Game/Game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/GameScreen/GameScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/GameScreen/GameScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/GameWrapper/GameWrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/GameWrapper/GameWrapper.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
