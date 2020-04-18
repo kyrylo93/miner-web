@@ -4,10 +4,10 @@ import { difficultContext } from "../../context/DifficultContext";
 
 const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, getCloseBombsAmount, blocksMap, openNearBlocks, amount, flagsAmount}) => {
 	const isBomb = element.type === 'b';
-	const [bombsAmount, setAmount] = useState(element.bombsAround);
+	const [isBoomed, setIsBoomed] = useState(false);
 	const [clicked, setClicked] = useState(element.isClicked);
 	const [isFlagSet, setIsFlagSet] = useState(element.isFlagSet);
-	const [isBoomed, setIsBoomed] = useState(false);
+	const [bombsAmount, setAmount] = useState(element.bombsAround);
 
 	const { difficult } = useContext(difficultContext);
 
@@ -15,8 +15,7 @@ const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, g
 		setAmount(0);
 		setClicked(false);
 		setIsFlagSet(false)
-
-		return () => setIsBoomed(false)
+		setIsBoomed(false)
 	}, [ difficult ]);
 
 	useEffect(() => {
@@ -46,7 +45,9 @@ const GameBlock = ({x, y, element, isBombsShowed, onBombClick, onSetFlagClick, g
 			onBombClick(event);
 		}
 
-		openNearBlocks(x, y)
+		if (!isBomb) {
+			openNearBlocks(x, y)
+		}
 	};
 
 	const onContextBlockClick = event => {

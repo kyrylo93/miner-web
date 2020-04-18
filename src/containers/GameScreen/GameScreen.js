@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from "react";
 import classes from './GameSrceen.module.css';
-
-//  components
 import GameBlock from "../../components/GameBlock/GameBlock";
 
 const GameScreen = ({ map, amount, setIsWin, setIsDefeat, width, height, bombsList }) => {
@@ -20,19 +18,19 @@ const GameScreen = ({ map, amount, setIsWin, setIsDefeat, width, height, bombsLi
 		setIsBombsShowed(true);
 		setIsDefeat(true);
 	};
-	
+
 	const onSetFlagClick = (isPlusOne) => {
 		isPlusOne ? setFlagsAmount(flagsAmount + 1) : setFlagsAmount(flagsAmount - 1);
-		
+
 		if (flagsAmount < amount -1) return;
-		
+
 		const checked = bombsList.filter(el => el.isFlagSet);
 		if (checked.length === amount) {
 			setIsBombsShowed(true);
 			setIsWin(true);
 		}
 	};
-	
+
 	const getNextBlock = (x, y, left = 0, right = 0, top = 0, bottom = 0) => {
 		return blocksMap?.[x - top + bottom]?.[y - left + right]
 	};
@@ -42,52 +40,53 @@ const GameScreen = ({ map, amount, setIsWin, setIsDefeat, width, height, bombsLi
 		const rightElement = getNextBlock(x, y, 0, 1, 0, 0)?.type;
 		const topElement = getNextBlock(x, y, 0, 0, 1, 0)?.type;
 		const bottomElement = getNextBlock(x, y, 0, 0, 0, 1)?.type;
-		
+
 		const lefTopElement = getNextBlock(x, y, 1, 0, 1, 0)?.type;
 		const rightTopElement = getNextBlock(x, y, 0, 1, 1, 0)?.type;
 		const lefBottomElement = getNextBlock(x, y, 1, 0, 0, 1)?.type;
 		const rightBottomElement = getNextBlock(x, y, 0, 1, 0, 1)?.type;
-		
+
 		const elements = [leftElement, rightElement, topElement, bottomElement, lefTopElement, rightTopElement, lefBottomElement, rightBottomElement];
 		return elements.reduce((acc, curr) => curr === 'b' ? acc + 1 : acc, 0);
 	};
-	
+
 	const openNearBlocks = (x, y, map) => {
 		const newMap = map ? [...map] : [...blocksMap];
-		
+
+		const leftBlock = getNextBlock(x, y, 1, 0, 0, 0);
+		const rightBlock = getNextBlock(x, y, 0, 1, 0, 0);
+		const topBlock = getNextBlock(x, y, 0, 0, 1, 0);
+		const bottomBlock = getNextBlock(x, y, 0, 0, 0, 1);
+
+		const lefTopBlock = getNextBlock(x, y, 1, 0, 1, 0);
+		const rightTopBlock = getNextBlock(x, y, 0, 1, 1, 0);
+		const lefBottomBlock = getNextBlock(x, y, 1, 0, 0, 1);
+		const rightBottomBlock = getNextBlock(x, y, 0, 1, 0, 1);
+
 		const currElement = getNextBlock(x, y, 0, 0, 0, 0);
-		const leftElement = getNextBlock(x, y, 1, 0, 0, 0);
-		const rightElement = getNextBlock(x, y, 0, 1, 0, 0);
-		const topElement = getNextBlock(x, y, 0, 0, 1, 0);
-		const bottomElement = getNextBlock(x, y, 0, 0, 0, 1);
-		
-		const lefTopElement = getNextBlock(x, y, 1, 0, 1, 0);
-		const rightTopElement = getNextBlock(x, y, 0, 1, 1, 0);
-		const lefBottomElement = getNextBlock(x, y, 1, 0, 0, 1);
-		const rightBottomElement = getNextBlock(x, y, 0, 1, 0, 1);
-		
+
 		if (currElement.bombsAround > 0) {
 			currElement.isClicked = true;
 			return;
 		}
-		
-		const elements = [leftElement, rightElement, topElement, bottomElement, lefTopElement, rightTopElement, lefBottomElement, rightBottomElement];
-		
-		elements.forEach(el => {
-			if (el) {
-				if (el.isClicked || el.isFlagSet) return;
-				if (el.type === 'b') return;
-			
-				if (el.bombsAround > 0) {
-					el.isClicked = true;
+
+		const blocks = [leftBlock, rightBlock, topBlock, bottomBlock, lefTopBlock, rightTopBlock, lefBottomBlock, rightBottomBlock];
+
+		blocks.forEach(block => {
+			if (block) {
+				if (block.isClicked || block.isFlagSet) return;
+				if (block.type === 'b') return;
+
+				if (block.bombsAround > 0) {
+					block.isClicked = true;
 					return;
 				}
-				
-				el.isClicked = true;
-				openNearBlocks(el.x, el.y, newMap)
+
+				block.isClicked = true;
+				openNearBlocks(block.x, block.y, newMap)
 			}
 		});
-		
+
 		setBlocksMap(newMap);
 	};
 
@@ -99,7 +98,7 @@ const GameScreen = ({ map, amount, setIsWin, setIsDefeat, width, height, bombsLi
 				element={el} key={`${rowIndex}_${elIndex}`} onBombClick={onBombClick} onSetFlagClick={onSetFlagClick}
 			/>)
 	});
-	
+
 	return (
 		<section>
 			<p>flags : {flagsAmount}</p>

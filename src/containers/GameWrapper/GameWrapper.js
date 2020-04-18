@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import GameScreen from "../GameScreen/GameScreen";
 import { getMap } from "../../utils/getMap";
+import GameScreen from "../GameScreen/GameScreen";
 import {getMapWithBombs} from "../../utils/getMapWithBombs";
 
 const GameWrapper = ({difficult}) => {
